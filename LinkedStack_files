@@ -1,0 +1,124 @@
+//the first Node's next ref points to null(because next is really previous it points backwards for a stack.) 
+public class LinearNode<T> //Represents a node in a linked list
+{
+    private LinearNode<T> next;
+    private T element;
+    public LinearNode() //creates an empty node
+    {
+        next=null;
+        element=null;
+    }
+    //overloaded constructor
+    /**
+     * Creates a node storing the specified element
+     * @param elem element to be stored
+     */
+    public LinearNode(T elem)
+    {
+	element=elem;
+        next=null;
+        
+    }
+    /**
+     * Returns the node that follows this one.
+     * @return reference to the next node
+     */
+    public LinearNode<T> getNext()
+    {
+        return next;
+    }
+    /**
+     * Sets the node that follows this one.
+     * @param node node to follow this one
+     */
+    public void setNext(LinearNode<T> node)
+    {
+        next=node;
+    }
+    /**
+     * Returns the element stored in this node
+     * @return element stored at the node
+     */
+    public T getElement()
+    {
+        return element;
+    }
+    /**
+     * Sets the element stored in this node
+     * @param elem element to be stored at this node
+     */
+    public void setElement(T elem)
+    {
+        element=elem;
+    }
+}
+-------- //new class 
+public class LinkedStack<T> //implements StackADT<T>
+{
+    private int count;
+    private LinearNode<T> top; //topNode
+    /**
+     * Creates an empty stack.
+     */
+    public LinkedStack()
+    {
+        count=0;
+        top=null;
+    }
+    public void push(T element)
+    {
+        LinearNode<T> node = new LinearNode<T>(element);
+        node.setNext(top);
+        top=node;
+        count++;
+    }
+    public T pop()
+    {
+        T result= top.getElement();
+        top = top.getNext();
+        count--;
+        return result;
+    }
+    public T peek()
+    {
+        return top.getElement();
+    }
+    public boolean isEmpty()
+    {
+        return count<=0;
+    }
+    public int size()
+    {
+        return count;
+    }
+
+    public String toString()
+    {
+        String str = "";
+        LinearNode<T> topTemp = top;
+        while(topTemp!=null)
+        {
+            str=str + topTemp.getElement() + "\n";
+            topTemp = topTemp.getNext();
+        }
+        return str;
+    }
+
+}
+-------
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        LinkedStack<Integer> list = new LinkedStack<Integer>();
+        list.push(5); //test values
+        list.push(6);
+        list.push(11);
+        System.out.println(list);
+//        list.pop();
+//        System.out.println("stack after pop " + list);
+
+
+    }
+}
