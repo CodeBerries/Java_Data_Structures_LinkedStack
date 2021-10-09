@@ -79,6 +79,16 @@ public class LinkedStack<T> //implements StackADT<T>
         count--;
         return result;
     }
+    
+    public void pop() //this pop saves memory?
+    {
+        LinearNode<T> temp = top;
+        T result = top.getElement();
+        top = top.getNext();
+        temp=null;
+        count--;
+        return result;
+    }	
     public T peek()
     {
         return top.getElement();
